@@ -1,25 +1,41 @@
 import { useNavigation } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Button from "../Components/Button";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
+import Button from "../Components/Button/Button";
+import SimpsonsList from "../Components/Simpsons/SimpsonsList";
 import { AppStackParamList } from "../StackParamLists/AppStackParamList";
+import { getSimpsons } from "../Utils/Services/service";
 
-type HomeScreenProp = NativeStackNavigationProp<AppStackParamList, "List">;
+type ListScreenProp = NativeStackNavigationProp<AppStackParamList, "List">;
 
-const HomeScreen = () => {
-	const navigation = useNavigation<HomeScreenProp>();
+const ListScreen = () => {
+	const navigation = useNavigation<ListScreenProp>();
+	const [screenState, setScreenState] = useState({
+		dataSource: [],
+		loading: true,
+	});
+	const handleData = async () => {
+		setScreenState({ dataSource: [], loading: true });
+		let result = await getSimpsons();
+		setScreenState({ dataSource: result.data, loading: false });
+	};
+	useEffect(() => {
+		handleData();
+	}, []);
+
 	return (
 		<View style={styles.container}>
-			<Text>List Screen</Text>
+			{screenState.loading ? (
+				<ActivityIndicator size={50} color='red' />
+			) : (
+				<SimpsonsList dataSource={screenState.dataSource} navigation={navigation} refreshData={handleData} />
+			)}
 			<Button
-				text='Go To Create Screen'
-				corner='curved'
-				type='outlined'
-				buttonColor='black'
-				textColor='black'
+				text={`+`}
 				textStyle={styles.buttonText}
-				onPress={(e) => {
+				buttonStyle={styles.buttonStyle}
+				onPress={() => {
 					navigation.navigate("Create");
 				}}
 			/>
@@ -27,15 +43,20 @@ const HomeScreen = () => {
 	);
 };
 
-export default HomeScreen;
+export default ListScreen;
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
 		alignItems: "center",
-		justifyContent: "center",
+		justifyContent: "flex-start",
+		flex: 1,
 	},
 	buttonText: {
-		fontWeight: "600",
+		fontSize: 50,
+	},
+	buttonStyle: {
+		position: "absolute",
+		bottom: "3%",
+		right: "5%",
 	},
 });

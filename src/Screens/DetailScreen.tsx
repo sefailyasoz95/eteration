@@ -1,26 +1,72 @@
-import { useNavigation } from "@react-navigation/core";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { useNavigation, useRoute } from "@react-navigation/core";
+import { NativeStackNavigationOptions, NativeStackNavigationProp } from "@react-navigation/native-stack";
+import React, { useEffect, useState } from "react";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { AppStackParamList } from "../StackParamLists/AppStackParamList";
-type UpdateScreenProp = NativeStackNavigationProp<AppStackParamList, "Detail">;
+import { RouteProp } from "@react-navigation/native";
+import { imageUrlHelper } from "../Utils/Helpers/imageUrlHelper";
+type DetailScreenProp = NativeStackNavigationProp<AppStackParamList, "Detail">;
+type ProfileScreenRouteProp = RouteProp<AppStackParamList, "Detail">;
 
-const UpdateScreen = () => {
-	const navigation = useNavigation<UpdateScreenProp>();
+const DetailScreen = () => {
+	const navigation = useNavigation<DetailScreenProp>();
+	const route = useRoute<ProfileScreenRouteProp>();
+	const { simpson } = route.params;
+	const options: NativeStackNavigationOptions = {
+		headerTitle: `About ${simpson.name.split(" ")[0]}`,
+	};
+	const [isValidURL, setIsValidURL] = useState(false);
 
+	useEffect(() => {
+		setIsValidURL(imageUrlHelper(simpson?.avatar));
+		navigation.setOptions(options);
+	}, []);
 	return (
 		<View style={styles.container}>
-			<Text>Update here</Text>
+			{isValidURL ? (
+				<Image source={{ uri: simpson.avatar }} width={50} height={50} style={styles.image} />
+			) : (
+				<Text style={styles.noImage}>⛔</Text>
+			)}
+			<Text style={styles.name}>{simpson.name}</Text>
+			<Text style={styles.job}>{simpson.job}</Text>
+			<Text style={styles.about}>{simpson.about}</Text>
 		</View>
 	);
 };
 
-export default UpdateScreen;
+export default DetailScreen;
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: "center",
-		justifyContent: "center",
+		justifyContent: "flex-start",
+		marginHorizontal: 10,
+	},
+	image: {
+		height: 300,
+		width: 170,
+		resizeMode: "contain",
+		marginTop: "2%",
+	},
+	noImage: {
+		padding: 10,
+	},
+	name: {
+		fontWeight: "bold",
+		fontSize: 20,
+		letterSpacing: 1,
+	},
+	job: {
+		fontSize: 16,
+		marginTop: 5,
+		textTransform: "capitalize",
+		color: "rgba(0,0,0,0.8)",
+	},
+	about: {
+		fontSize: 16,
+		color: "#555",
+		marginVertical: 15,
 	},
 });

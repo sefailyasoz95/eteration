@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`init detail screen renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "flex-start",
+      "marginHorizontal": 13,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "padding": 10,
+      }
+    }
+  >
+    ⛔
+  </Text>
+  <Text
+    style={
+      Object {
+        "fontSize": 20,
+        "fontWeight": "bold",
+        "letterSpacing": 1,
+        "textTransform": "capitalize",
+      }
+    }
+  >
+    simpson name
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "rgba(0,0,0,0.8)",
+        "fontSize": 16,
+        "marginTop": 5,
+        "textTransform": "capitalize",
+      }
+    }
+  />
+  <Text
+    style={
+      Object {
+        "color": "#555",
+        "fontSize": 16,
+        "marginVertical": 15,
+      }
+    }
+  />
+</View>
+`;

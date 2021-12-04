@@ -22,3 +22,7 @@ export const formValidator = (formInputs: any) => {
 	let isformValid = !(tempErrors.about || tempErrors.jobTitle || tempErrors.nameSurname);
 	return { tempErrors, isformValid };
 };
+
+export const toplama = (a: number, b: number) => {
+	return a + b;
+};

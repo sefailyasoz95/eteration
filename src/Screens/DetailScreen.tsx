@@ -5,12 +5,12 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import { AppStackParamList } from "../StackParamLists/AppStackParamList";
 import { RouteProp } from "@react-navigation/native";
 import { imageUrlHelper } from "../Utils/Helpers/imageUrlHelper";
-type DetailScreenProp = NativeStackNavigationProp<AppStackParamList, "Detail">;
-type DetailScreenRouteProp = RouteProp<AppStackParamList, "Detail">;
 
-const DetailScreen = () => {
-	const navigation = useNavigation<DetailScreenProp>();
-	const route = useRoute<DetailScreenRouteProp>();
+type Props = {
+	navigation: NativeStackNavigationProp<AppStackParamList, "Detail">;
+	route: RouteProp<AppStackParamList, "Detail">;
+};
+const DetailScreen = ({ navigation, route }: Props) => {
 	const { simpson } = route.params;
 	const options: NativeStackNavigationOptions = {
 		headerTitle: `About ${simpson.name.split(" ")[0]}`,

@@ -21,6 +21,7 @@ type Props = {
 	textColor?: string;
 	onPress: (event: GestureResponderEvent) => void;
 	loading?: boolean;
+	testID: string;
 };
 
 const Button: React.FC<Props> = ({
@@ -33,6 +34,7 @@ const Button: React.FC<Props> = ({
 	buttonStyle,
 	onPress,
 	loading,
+	testID,
 }) => {
 	const buttonTypes: Object = {
 		borderRadius:
@@ -50,7 +52,7 @@ const Button: React.FC<Props> = ({
 		borderWidth: !type || type === "none" ? 0 : 1,
 	};
 	return (
-		<TouchableOpacity style={[styles.baseContainerStyle, buttonStyle, buttonTypes]} onPress={onPress}>
+		<TouchableOpacity style={[styles.baseContainerStyle, buttonStyle, buttonTypes]} onPress={onPress} testID={testID}>
 			{loading ? (
 				<ActivityIndicator color={textColor} />
 			) : (

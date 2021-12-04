@@ -1,4 +1,3 @@
-import { useNavigation } from "@react-navigation/core";
 import { CommonActions } from "@react-navigation/routers";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useState } from "react";
@@ -9,15 +8,18 @@ import { AppStackParamList } from "../StackParamLists/AppStackParamList";
 import { formValidator } from "../Utils/Helpers/formValidator";
 import { formErrorState } from "../Utils/InitialStates/formErrorState";
 import { formValues } from "../Utils/InitialStates/formValues";
-import { createSimpson, getSimpsons } from "../Utils/Services/service";
-type CreateScreenProp = NativeStackNavigationProp<AppStackParamList, "Create">;
+import { createSimpson } from "../Utils/Services/service";
 
-const CreateScreen = () => {
-	const navigation = useNavigation<CreateScreenProp>();
+type Props = {
+	navigation: NativeStackNavigationProp<AppStackParamList, "Create">;
+};
+
+const CreateScreen = ({ navigation }: Props) => {
 	const [loading, setLoading] = useState(false);
 	const [formInputs, setFormInputs] = useState(formValues);
 	const [errorStates, setErrorStates] = useState(formErrorState);
 	const handleNewCharacter = async () => {
+		setLoading(true);
 		// burası kesinlikle daha iyi olabilir. Formik vb ekstra bir kütüphane kullanmak istemedim
 		const { isformValid, tempErrors } = formValidator(formInputs);
 		setErrorStates(tempErrors);
@@ -41,6 +43,7 @@ const CreateScreen = () => {
 			behavior={Platform.OS === "ios" ? "padding" : "padding"}>
 			<Input
 				placeholder='Name Surname'
+				testID='Name Surname'
 				corner='rounded'
 				onTextChanged={(value: string) => setFormInputs({ ...formInputs, name: value })}
 				required={true}
@@ -48,6 +51,7 @@ const CreateScreen = () => {
 			/>
 			<Input
 				placeholder='Job Title'
+				testID='Job Title'
 				required={true}
 				corner='rounded'
 				hasError={errorStates.jobTitle}
@@ -55,6 +59,7 @@ const CreateScreen = () => {
 			/>
 			<Input
 				placeholder='About Him/Her'
+				testID='About Him/Her'
 				required={true}
 				corner='rounded'
 				type='textarea'
@@ -63,12 +68,14 @@ const CreateScreen = () => {
 			/>
 			<Input
 				placeholder='Image Link'
+				testID='Image Link'
 				corner='rounded'
 				onTextChanged={(value: string) => setFormInputs({ ...formInputs, avatar: value })}
 			/>
 			<Button
 				textColor='#fff'
 				text='Add Simpson'
+				testID={"Add Simpson"}
 				type='filled'
 				onPress={handleNewCharacter}
 				corner='curved'
@@ -80,8 +87,6 @@ const CreateScreen = () => {
 		</KeyboardAvoidingView>
 	);
 };
-
-export default CreateScreen;
 
 const styles = StyleSheet.create({
 	container: {
@@ -98,3 +103,5 @@ const styles = StyleSheet.create({
 		minWidth: 125,
 	},
 });
+
+export default CreateScreen;

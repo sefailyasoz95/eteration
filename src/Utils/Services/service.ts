@@ -5,7 +5,6 @@ const getSimpsons = async () => {
 	let result: any;
 	try {
 		let existingData = await AsyncStorageLib.getItem("simpsons");
-
 		if (!existingData) {
 			let tempResult = await GetSimpsonsAsync();
 			await AsyncStorageLib.setItem("simpsons", JSON.stringify(tempResult.data));

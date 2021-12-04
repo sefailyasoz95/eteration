@@ -22,6 +22,7 @@ type Props = {
 	type?: "input" | "textarea";
 	onTextChanged: Function;
 	style?: StyleProp<ViewStyle> | any;
+	testID: string;
 };
 
 const Input: React.FC<Props> = ({
@@ -33,6 +34,7 @@ const Input: React.FC<Props> = ({
 	corner,
 	type,
 	onTextChanged,
+	testID,
 }) => {
 	const [inputError, setInputError] = useState(false);
 	const placeholderRef = useRef(new Animated.Value(11)).current;
@@ -73,6 +75,7 @@ const Input: React.FC<Props> = ({
 			</Animated.Text>
 			<TextInput
 				ref={inputRef}
+				testID={testID}
 				style={[styles.input, inputStyles]}
 				keyboardType={keyboardType}
 				multiline={type === "textarea" && true}

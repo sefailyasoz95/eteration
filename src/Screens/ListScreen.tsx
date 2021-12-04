@@ -1,16 +1,15 @@
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import Button from "../Components/Button/Button";
 import SimpsonsList from "../Components/Simpsons/SimpsonsList";
 import { AppStackParamList } from "../StackParamLists/AppStackParamList";
 import { getSimpsons } from "../Utils/Services/service";
 
-type ListScreenProp = NativeStackNavigationProp<AppStackParamList, "List">;
-
-const ListScreen = () => {
-	const navigation = useNavigation<ListScreenProp>();
+type Props = {
+	navigation: NativeStackNavigationProp<AppStackParamList, "List">;
+};
+const ListScreen = ({ navigation }: Props) => {
 	const [screenState, setScreenState] = useState({
 		dataSource: [],
 		loading: true,
@@ -20,9 +19,8 @@ const ListScreen = () => {
 		let result = await getSimpsons();
 		setScreenState({ dataSource: result.data, loading: false });
 	};
-	useEffect(() => {
-		handleData();
-	}, []);
+
+	screenState.dataSource.length < 1 && handleData();
 
 	return (
 		<View style={styles.container}>
@@ -33,6 +31,7 @@ const ListScreen = () => {
 			)}
 			<Button
 				text={`+`}
+				testID={"+"}
 				textStyle={styles.buttonText}
 				buttonStyle={styles.buttonStyle}
 				onPress={() => {
@@ -43,13 +42,11 @@ const ListScreen = () => {
 	);
 };
 
-export default ListScreen;
-
 const styles = StyleSheet.create({
 	container: {
+		flex: 1,
 		alignItems: "center",
 		justifyContent: "flex-start",
-		flex: 1,
 	},
 	buttonText: {
 		fontSize: 50,
@@ -60,3 +57,5 @@ const styles = StyleSheet.create({
 		right: "5%",
 	},
 });
+
+export default ListScreen;

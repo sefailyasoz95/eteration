@@ -1,6 +1,6 @@
-import { useNavigation } from "@react-navigation/core";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import Button from "../Components/Button/Button";
 import SimpsonsList from "../Components/Simpsons/SimpsonsList";

@@ -32,7 +32,7 @@ const SimpsonsList: React.FC<Props> = ({ dataSource, navigation, refreshData }) 
 				text: "Yes",
 				onPress: async () => {
 					await deleteSimpson(item.id);
-					onRefresh();
+					refreshData();
 				},
 			},
 		]);

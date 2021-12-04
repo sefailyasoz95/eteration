@@ -8,6 +8,7 @@ import {
 	GestureResponderEvent,
 	TextStyle,
 	ColorPropType,
+	ActivityIndicator,
 } from "react-native";
 
 type Props = {
@@ -19,9 +20,20 @@ type Props = {
 	buttonColor?: string;
 	textColor?: string;
 	onPress: (event: GestureResponderEvent) => void;
+	loading?: boolean;
 };
 
-const Button: React.FC<Props> = ({ text, type, buttonColor, textStyle, textColor, corner, buttonStyle, onPress }) => {
+const Button: React.FC<Props> = ({
+	text,
+	type,
+	buttonColor,
+	textStyle,
+	textColor,
+	corner,
+	buttonStyle,
+	onPress,
+	loading,
+}) => {
 	const buttonTypes: Object = {
 		borderRadius:
 			corner === "cornered"
@@ -39,7 +51,11 @@ const Button: React.FC<Props> = ({ text, type, buttonColor, textStyle, textColor
 	};
 	return (
 		<TouchableOpacity style={[styles.baseContainerStyle, buttonStyle, buttonTypes]} onPress={onPress}>
-			<Text style={[styles.baseTextStyle, textStyle, { color: textColor ? textColor : "#000" }]}>{text}</Text>
+			{loading ? (
+				<ActivityIndicator color={textColor} />
+			) : (
+				<Text style={[styles.baseTextStyle, textStyle, { color: textColor ? textColor : "#000" }]}>{text}</Text>
+			)}
 		</TouchableOpacity>
 	);
 };

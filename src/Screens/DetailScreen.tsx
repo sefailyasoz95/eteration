@@ -6,11 +6,11 @@ import { AppStackParamList } from "../StackParamLists/AppStackParamList";
 import { RouteProp } from "@react-navigation/native";
 import { imageUrlHelper } from "../Utils/Helpers/imageUrlHelper";
 type DetailScreenProp = NativeStackNavigationProp<AppStackParamList, "Detail">;
-type ProfileScreenRouteProp = RouteProp<AppStackParamList, "Detail">;
+type DetailScreenRouteProp = RouteProp<AppStackParamList, "Detail">;
 
 const DetailScreen = () => {
 	const navigation = useNavigation<DetailScreenProp>();
-	const route = useRoute<ProfileScreenRouteProp>();
+	const route = useRoute<DetailScreenRouteProp>();
 	const { simpson } = route.params;
 	const options: NativeStackNavigationOptions = {
 		headerTitle: `About ${simpson.name.split(" ")[0]}`,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: "center",
 		justifyContent: "flex-start",
-		marginHorizontal: 10,
+		marginHorizontal: 13,
 	},
 	image: {
 		height: 300,
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		fontSize: 20,
 		letterSpacing: 1,
+		textTransform: "capitalize",
 	},
 	job: {
 		fontSize: 16,

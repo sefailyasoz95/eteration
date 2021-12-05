@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Simpsons List Component should render without issues 1`] = `
+<FlatList
+  contentContainerStyle={Object {}}
+  data={
+    Array [
+      Object {
+        "about": "something about Merge",
+        "avatar": "https://image.com",
+        "id": 1,
+        "job": "Merge's job",
+        "name": "Merge Simpson",
+      },
+      Object {
+        "about": "something about Homer",
+        "avatar": "https://image.com",
+        "id": 2,
+        "job": "Homer's job",
+        "name": "Homer Simpson",
+      },
+    ]
+  }
+  disableVirtualization={false}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onEndReachedThreshold={2}
+  refreshControl={
+    <RefreshControlMock
+      onRefresh={[Function]}
+      refreshing={false}
+    />
+  }
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  style={
+    Object {
+      "marginTop": "5%",
+      "maxHeight": "80%",
+      "width": "95%",
+    }
+  }
+  testID="flatlist"
+  updateCellsBatchingPeriod={50}
+  windowSize={21}
+/>
+`;

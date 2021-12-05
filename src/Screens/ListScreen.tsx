@@ -20,23 +20,30 @@ const ListScreen = ({ navigation }: Props) => {
 		setScreenState({ dataSource: result.data, loading: false });
 	};
 
-	screenState.dataSource.length < 1 && handleData();
+	useEffect(() => {
+		// test çalıştırıldığında bu fonksiyonun async olup await'lenmediğinden dolayı kızıyor
+		// açıkçası bilmiyorum nasıl giderilir bu uyarı.
+		handleData();
+	}, []);
 
 	return (
-		<View style={styles.container}>
+		<View style={styles.container} testID='container'>
 			{screenState.loading ? (
-				<ActivityIndicator size={50} color='red' />
+				<ActivityIndicator size={50} color='red' testID='indicator' />
 			) : (
-				<SimpsonsList dataSource={screenState.dataSource} navigation={navigation} refreshData={handleData} />
+				<SimpsonsList
+					dataSource={screenState.dataSource}
+					navigation={navigation}
+					refreshData={handleData}
+					testID='simpson-flatlist'
+				/>
 			)}
 			<Button
 				text={`+`}
 				testID={"+"}
 				textStyle={styles.buttonText}
 				buttonStyle={styles.buttonStyle}
-				onPress={() => {
-					navigation.navigate("Create");
-				}}
+				onPress={() => navigation.navigate("Create")}
 			/>
 		</View>
 	);

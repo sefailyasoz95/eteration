@@ -6,23 +6,26 @@ type Props = {
 	item: any;
 	onPress: (event: GestureResponderEvent) => void;
 	onDelete: (event: GestureResponderEvent) => void;
+	testID: string;
 };
 
-const SimpsonItem: React.FC<Props> = ({ item, onPress, onDelete }) => {
+const SimpsonItem: React.FC<Props> = ({ item, onPress, onDelete, testID }) => {
 	const [isValidURL, setIsValidURL] = useState(false);
 	useEffect(() => {
 		setIsValidURL(imageUrlHelper(item.avatar));
 	}, []);
 
 	return (
-		<TouchableOpacity style={styles.itemContainer} onPress={() => onPress(item)}>
+		<TouchableOpacity style={styles.itemContainer} onPress={() => onPress(item)} testID={testID || "simpsonItem"}>
 			<View style={styles.imageAndName}>
 				{isValidURL ? (
 					<Image source={{ uri: item.avatar }} width={50} height={50} style={styles.image} />
 				) : (
 					<Text style={styles.noImage}>⛔</Text>
 				)}
-				<Text style={styles.name}>{item.name}</Text>
+				<Text testID='simpsonName' style={styles.name}>
+					{item.name}
+				</Text>
 			</View>
 			<TouchableOpacity onPress={() => onDelete(item)}>
 				<Text style={styles.deleteButton}>{`x`} </Text>

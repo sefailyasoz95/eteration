@@ -52,7 +52,10 @@ const Button: React.FC<Props> = ({
 		borderWidth: !type || type === "none" ? 0 : 1,
 	};
 	return (
-		<TouchableOpacity style={[styles.baseContainerStyle, buttonStyle, buttonTypes]} onPress={onPress} testID={testID}>
+		<TouchableOpacity
+			style={[styles.baseContainerStyle, buttonStyle, buttonTypes]}
+			onPress={onPress}
+			testID={testID || "customButton"}>
 			{loading ? (
 				<ActivityIndicator color={textColor} />
 			) : (

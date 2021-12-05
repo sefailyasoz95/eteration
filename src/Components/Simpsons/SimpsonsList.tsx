@@ -9,9 +9,10 @@ type Props = {
 	dataSource: Array<Object>;
 	navigation: NativeStackNavigationProp<AppStackParamList, "List">;
 	refreshData: Function;
+	testID: string;
 };
 
-const SimpsonsList: React.FC<Props> = ({ dataSource, navigation, refreshData }) => {
+const SimpsonsList: React.FC<Props> = ({ dataSource, navigation, refreshData, testID }) => {
 	const showSimpsonDetail = (simpson: any) => {
 		navigation.navigate("Detail", { simpson });
 	};
@@ -40,11 +41,12 @@ const SimpsonsList: React.FC<Props> = ({ dataSource, navigation, refreshData }) 
 	return (
 		<FlatList
 			data={dataSource}
+			testID={testID || "flatlist"}
 			contentContainerStyle={styles.containerStyle}
 			style={styles.flatList}
 			refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
 			renderItem={({ item, index }) => (
-				<SimpsonItem key={index} item={item} onPress={showSimpsonDetail} onDelete={handleDelete} />
+				<SimpsonItem key={index} testID='simpsonItem' item={item} onPress={showSimpsonDetail} onDelete={handleDelete} />
 			)}
 		/>
 	);

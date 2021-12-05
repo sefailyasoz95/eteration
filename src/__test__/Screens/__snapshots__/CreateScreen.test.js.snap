@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create screen should render screen correctly 1`] = `
+<KeyboardAvoidingView
+  behavior="padding"
+  enabled={true}
+  keyboardVerticalOffset={0}
+  onTouchStart={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "flex-start",
+      "marginTop": 20,
+    }
+  }
+>
+  <Input
+    corner="rounded"
+    hasError={false}
+    onTextChanged={[Function]}
+    placeholder="Name Surname"
+    required={true}
+    testID="Name Surname"
+  />
+  <Input
+    corner="rounded"
+    hasError={false}
+    onTextChanged={[Function]}
+    placeholder="Job Title"
+    required={true}
+    testID="Job Title"
+  />
+  <Input
+    corner="rounded"
+    hasError={false}
+    onTextChanged={[Function]}
+    placeholder="About Him/Her"
+    required={true}
+    testID="About Him/Her"
+    type="textarea"
+  />
+  <Input
+    corner="rounded"
+    onTextChanged={[Function]}
+    placeholder="Image Link"
+    testID="Image Link"
+  />
+  <Button
+    buttonColor="#000"
+    buttonStyle={
+      Object {
+        "minWidth": 125,
+      }
+    }
+    corner="curved"
+    loading={false}
+    onPress={[Function]}
+    testID="AddSimpson"
+    text="Add Simpson"
+    textColor="#fff"
+    textStyle={
+      Object {
+        "fontSize": 16,
+        "fontWeight": "bold",
+      }
+    }
+    type="filled"
+  />
+</KeyboardAvoidingView>
+`;

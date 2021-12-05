@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Simpson Item Component should render component correctly 1`] = `
+<ForwardRef
+  onPress={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#fff",
+      "borderRadius": 10,
+      "elevation": 5,
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "marginHorizontal": 5,
+      "marginVertical": 5,
+      "padding": 10,
+      "shadowColor": "black",
+      "shadowOffset": Object {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.3,
+      "shadowRadius": 3,
+    }
+  }
+  testID="simpsonItem"
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "padding": 10,
+        }
+      }
+    >
+      ⛔
+    </Text>
+    <Text
+      style={
+        Object {
+          "letterSpacing": 1,
+          "marginHorizontal": 10,
+        }
+      }
+      testID="simpsonName"
+    >
+      Merge Simpson
+    </Text>
+  </View>
+  <ForwardRef
+    onPress={[Function]}
+  >
+    <Text
+      style={
+        Object {
+          "color": "#ff2222",
+          "fontSize": 25,
+          "fontWeight": "bold",
+          "padding": 10,
+        }
+      }
+    >
+      x
+       
+    </Text>
+  </ForwardRef>
+</ForwardRef>
+`;

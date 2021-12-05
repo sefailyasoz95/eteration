@@ -75,7 +75,7 @@ const Input: React.FC<Props> = ({
 			</Animated.Text>
 			<TextInput
 				ref={inputRef}
-				testID={testID}
+				testID={testID || "textinput"}
 				style={[styles.input, inputStyles]}
 				keyboardType={keyboardType}
 				multiline={type === "textarea" && true}

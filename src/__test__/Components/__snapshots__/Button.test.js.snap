@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Component should render screen correctly 1`] = `
+<ForwardRef
+  style={
+    Array [
+      Object {
+        "padding": 5,
+      },
+      undefined,
+      Object {
+        "backgroundColor": "rgba(0,0,0,0)",
+        "borderColor": undefined,
+        "borderRadius": undefined,
+        "borderWidth": 0,
+      },
+    ]
+  }
+  testID="customButton"
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "fontWeight": "500",
+          "letterSpacing": 1,
+        },
+        undefined,
+        Object {
+          "color": "#000",
+        },
+      ]
+    }
+  />
+</ForwardRef>
+`;

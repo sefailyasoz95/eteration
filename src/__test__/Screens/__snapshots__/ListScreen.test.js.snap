@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`list screen should render screen correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "flex-start",
+    }
+  }
+  testID="container"
+>
+  <ActivityIndicator
+    animating={true}
+    color="red"
+    hidesWhenStopped={true}
+    size={50}
+    testID="indicator"
+  />
+  <Button
+    buttonStyle={
+      Object {
+        "bottom": "3%",
+        "position": "absolute",
+        "right": "5%",
+      }
+    }
+    onPress={[Function]}
+    testID="+"
+    text="+"
+    textStyle={
+      Object {
+        "fontSize": 50,
+      }
+    }
+  />
+</View>
+`;

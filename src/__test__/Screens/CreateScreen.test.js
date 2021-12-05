@@ -1,21 +1,26 @@
 import React from "react";
 import { fireEvent, render } from "@testing-library/react-native";
 import CreateScreen from "../../Screens/CreateScreen";
+import { shallow, configure } from "enzyme";
+import toJson from "enzyme-to-json";
+import Adapter from "enzyme-adapter-react-16";
 
-// it("create screen renders correctly", () => {
-// 	const tree = render(<CreateScreen />);
-// });
+configure({ adapter: new Adapter() });
 
-// test("given empty formInputs, user can fill the inputs", () => {
-// 	const { getByText, getByTestId, getByA11yValue } = render(<CreateScreen />);
+describe("create screen", () => {
+	it("should render screen correctly", () => {
+		const component = shallow(<CreateScreen />);
+		expect(component.length).toBe(1);
+		expect(toJson(component)).toMatchSnapshot();
+	});
 
-// 	fireEvent.changeText(getByTestId("Name Surname"), "simpson");
-// 	fireEvent.changeText(getByTestId("Job Title"), "simpson");
-// 	fireEvent.changeText(getByTestId("About Him/Her"), "simpson");
-// 	fireEvent.changeText(getByTestId("Image Link"), "simpson");
-// 	fireEvent.press(getByText("Add Simpson"));
+	it("should update state on press", () => {
+		const changeFormState = jest.fn();
+		const wrapper = shallow(<CreateScreen />);
+		const handlePress = jest.spyOn(React, "useState");
+		handlePress.mockImplementation((formInputs) => [formInputs, changeFormState]);
 
-// 	const bananaElements = getByA11yValue("simpson");
-// 	expect(bananaElements).toHaveLength(4); // expect 'banana' to be on the list
-// 	// expect(tree).toMatchSnapshot();
-// });
+		expect(wrapper.find({ testID: "AddSimpson" }).simulate("click"));
+		expect(changeFormState).toBeTruthy();
+	});
+});

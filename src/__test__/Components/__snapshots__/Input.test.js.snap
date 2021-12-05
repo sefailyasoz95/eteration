@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input Component should render without issues 1`] = `
+<View
+  onTouchEnd={[Function]}
+  style={
+    Array [
+      Object {
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "marginVertical": 12,
+        "width": "95%",
+      },
+      Object {
+        "borderColor": "black",
+        "borderRadius": undefined,
+        "height": 40,
+      },
+    ]
+  }
+>
+  <ForwardRef(AnimatedComponentWrapper)
+    style={
+      Array [
+        Object {
+          "color": "rgba(0,0,0,0.5)",
+          "fontSize": 12,
+          "marginLeft": 5,
+          "position": "absolute",
+        },
+        Object {
+          "transform": Array [
+            Object {
+              "translateY": 11,
+            },
+          ],
+        },
+      ]
+    }
+  />
+  <TextInput
+    allowFontScaling={true}
+    multiline={false}
+    onEndEditing={[Function]}
+    onFocus={[Function]}
+    rejectResponderTermination={true}
+    style={
+      Array [
+        Object {
+          "marginTop": 3,
+          "paddingHorizontal": 8,
+          "paddingTop": 8,
+        },
+        Object {},
+      ]
+    }
+    testID="textinput"
+    underlineColorAndroid="transparent"
+  />
+</View>
+`;

@@ -75,7 +75,7 @@ const CreateScreen = ({ navigation }: Props) => {
 			<Button
 				textColor='#fff'
 				text='Add Simpson'
-				testID={"Add Simpson"}
+				testID={"AddSimpson"}
 				type='filled'
 				onPress={handleNewCharacter}
 				corner='curved'

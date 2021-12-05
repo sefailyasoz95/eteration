@@ -1,5 +1,5 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import Button from "../Components/Button/Button";
 import SimpsonsList from "../Components/Simpsons/SimpsonsList";
@@ -10,19 +10,18 @@ type Props = {
 	navigation: NativeStackNavigationProp<AppStackParamList, "List">;
 };
 const ListScreen = ({ navigation }: Props) => {
-	const [screenState, setScreenState] = useState({
+	const initial = {
 		dataSource: [],
 		loading: true,
-	});
+	};
+	const [screenState, setScreenState] = useState(initial);
 	const handleData = async () => {
-		setScreenState({ dataSource: [], loading: true });
+		setScreenState(initial);
 		let result = await getSimpsons();
 		setScreenState({ dataSource: result.data, loading: false });
 	};
 
-	useEffect(() => {
-		// test çalıştırıldığında bu fonksiyonun async olup await'lenmediğinden dolayı kızıyor
-		// açıkçası bilmiyorum nasıl giderilir bu uyarı.
+	useLayoutEffect(() => {
 		handleData();
 	}, []);
 

@@ -1,6 +1,6 @@
 import { CommonActions } from "@react-navigation/routers";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet } from "react-native";
 import Button from "../Components/Button/Button";
 import Input from "../Components/Input/Input";
@@ -15,12 +15,9 @@ type Props = {
 };
 
 const CreateScreen = ({ navigation }: Props) => {
-	const [loading, setLoading] = useState(false);
 	const [formInputs, setFormInputs] = useState(formValues);
 	const [errorStates, setErrorStates] = useState(formErrorState);
 	const handleNewCharacter = async () => {
-		setLoading(true);
-		// burası kesinlikle daha iyi olabilir. Formik vb ekstra bir kütüphane kullanmak istemedim
 		const { isformValid, tempErrors } = formValidator(formInputs);
 		setErrorStates(tempErrors);
 		if (isformValid) {
@@ -35,7 +32,10 @@ const CreateScreen = ({ navigation }: Props) => {
 			}
 		}
 	};
-
+	// NOTE
+	// useEffect(() => {
+	// 	console.log("effecg formInputs: ", formInputs);
+	// }, [formInputs]);
 	return (
 		<KeyboardAvoidingView
 			style={styles.container}
@@ -43,7 +43,7 @@ const CreateScreen = ({ navigation }: Props) => {
 			behavior={Platform.OS === "ios" ? "padding" : "padding"}>
 			<Input
 				placeholder='Name Surname'
-				testID='Name Surname'
+				testID='NameSurname'
 				corner='rounded'
 				onTextChanged={(value: string) => setFormInputs({ ...formInputs, name: value })}
 				required={true}
@@ -51,7 +51,7 @@ const CreateScreen = ({ navigation }: Props) => {
 			/>
 			<Input
 				placeholder='Job Title'
-				testID='Job Title'
+				testID='JobTitle'
 				required={true}
 				corner='rounded'
 				hasError={errorStates.jobTitle}
@@ -59,7 +59,7 @@ const CreateScreen = ({ navigation }: Props) => {
 			/>
 			<Input
 				placeholder='About Him/Her'
-				testID='About Him/Her'
+				testID='AboutHim/Her'
 				required={true}
 				corner='rounded'
 				type='textarea'
@@ -68,7 +68,7 @@ const CreateScreen = ({ navigation }: Props) => {
 			/>
 			<Input
 				placeholder='Image Link'
-				testID='Image Link'
+				testID='ImageLink'
 				corner='rounded'
 				onTextChanged={(value: string) => setFormInputs({ ...formInputs, avatar: value })}
 			/>
@@ -82,7 +82,6 @@ const CreateScreen = ({ navigation }: Props) => {
 				buttonColor='#000'
 				textStyle={styles.buttonText}
 				buttonStyle={styles.buttonContainer}
-				loading={loading}
 			/>
 		</KeyboardAvoidingView>
 	);

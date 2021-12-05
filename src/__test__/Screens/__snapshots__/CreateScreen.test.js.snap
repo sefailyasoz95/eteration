@@ -21,7 +21,7 @@ exports[`create screen should render screen correctly 1`] = `
     onTextChanged={[Function]}
     placeholder="Name Surname"
     required={true}
-    testID="Name Surname"
+    testID="NameSurname"
   />
   <Input
     corner="rounded"
@@ -29,7 +29,7 @@ exports[`create screen should render screen correctly 1`] = `
     onTextChanged={[Function]}
     placeholder="Job Title"
     required={true}
-    testID="Job Title"
+    testID="JobTitle"
   />
   <Input
     corner="rounded"
@@ -37,14 +37,14 @@ exports[`create screen should render screen correctly 1`] = `
     onTextChanged={[Function]}
     placeholder="About Him/Her"
     required={true}
-    testID="About Him/Her"
+    testID="AboutHim/Her"
     type="textarea"
   />
   <Input
     corner="rounded"
     onTextChanged={[Function]}
     placeholder="Image Link"
-    testID="Image Link"
+    testID="ImageLink"
   />
   <Button
     buttonColor="#000"
@@ -54,7 +54,6 @@ exports[`create screen should render screen correctly 1`] = `
       }
     }
     corner="curved"
-    loading={false}
     onPress={[Function]}
     testID="AddSimpson"
     text="Add Simpson"

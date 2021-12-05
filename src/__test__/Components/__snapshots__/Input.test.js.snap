@@ -18,6 +18,7 @@ exports[`Input Component should render without issues 1`] = `
       },
     ]
   }
+  testID="inputContainer"
 >
   <ForwardRef(AnimatedComponentWrapper)
     style={

@@ -10,8 +10,6 @@ const getSimpsons = async () => {
 			await AsyncStorageLib.setItem("simpsons", JSON.stringify(tempResult.data));
 			result = tempResult;
 		} else {
-			console.log("JSON.parse(existingData): ", JSON.parse(existingData));
-
 			result = {
 				data: JSON.parse(existingData),
 				status: 200,

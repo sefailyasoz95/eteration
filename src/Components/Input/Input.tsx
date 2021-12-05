@@ -69,7 +69,10 @@ const Input: React.FC<Props> = ({
 		}
 	};
 	return (
-		<View style={[styles.inputContainer, inputContainerStyles]} onTouchEnd={() => inputRef.current?.focus()}>
+		<View
+			style={[styles.inputContainer, inputContainerStyles]}
+			onTouchEnd={() => inputRef.current?.focus()}
+			testID='inputContainer'>
 			<Animated.Text style={[styles.placeholder, { transform: [{ translateY: placeholderRef }] }]}>
 				{placeholder}
 			</Animated.Text>

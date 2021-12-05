@@ -9,13 +9,13 @@ const navigation = {
 	navigate: jest.fn(),
 };
 describe("list screen", () => {
-	it("should render screen correctly", async () => {
+	it("should render screen correctly", () => {
 		const component = shallow(<ListScreen />);
 		expect(component.length).toBe(1);
 		expect(toJson(component)).toMatchSnapshot();
 	});
 
-	it("it should simulate the plus button press and navigation to create screen", async () => {
+	it("it should simulate the plus button press and navigation to create screen", () => {
 		const component = create(<ListScreen navigation={navigation} />);
 		const button = component.root.findByProps({ testID: "+" }).props;
 		button.onPress();

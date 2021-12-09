@@ -13,6 +13,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
+  withTiming,
 } from "react-native-reanimated";
 import { SPRING_CONFIG } from "../Utils/Constants/SPRING_CONFIG";
 
@@ -22,7 +23,9 @@ type Props = {
 };
 type AnimatedGHContext = {
   startTop: number;
-  opacity: number;
+  scale: number;
+  x: number;
+  y: number;
 };
 const DetailScreen = ({ navigation, route }: Props) => {
   const { simpson } = route.params;
@@ -31,26 +34,39 @@ const DetailScreen = ({ navigation, route }: Props) => {
   //   };
   const [isValidURL, setIsValidURL] = useState(false);
   const top = useSharedValue(0);
-  const opacity = useSharedValue(1);
+  const scale = useSharedValue(1);
+  const x = useSharedValue(0);
+  const y = useSharedValue(0);
   const dimension = useWindowDimensions();
   const animatedStyle = useAnimatedStyle(() => {
     return {
-      top: withSpring(top.value, SPRING_CONFIG),
+      //   top: withSpring(top.value, SPRING_CONFIG),
+      transform: [
+        { scale: withTiming(scale.value) },
+        { translateX: withSpring(x.value, SPRING_CONFIG) },
+        { translateY: withSpring(y.value, SPRING_CONFIG) },
+      ],
     };
   });
   const gestureHandler = useAnimatedGestureHandler<PanGestureHandlerGestureEvent, AnimatedGHContext>({
     onStart(_, context) {
       context.startTop = top.value;
+      (context.x = x.value), (context.y = y.value);
     },
-    onActive(event, context) {
-      top.value = context.startTop + event.translationY;
+    onActive({ translationX, translationY }, context) {
+      //   top.value = context.startTop + translationY;
+      scale.value = 0.95;
+      x.value = context.x + translationX;
+      y.value = context.y + translationY;
     },
     onEnd() {
-      if (top.value < dimension.height / 5) {
-        top.value = 0;
+      if (y.value < 150) {
+        // top.value = 0;
+        scale.value = 1;
+        x.value = 0;
+        y.value = 0;
       } else {
-        top.value = 0;
-        console.log("top.value");
+        // top.value = 0;
         runOnJS(navigation.goBack)();
       }
     },
@@ -60,10 +76,12 @@ const DetailScreen = ({ navigation, route }: Props) => {
     // navigation.setOptions(options);
   }, []);
   return (
-    <View style={styles.container}>
+    // <View style={styles.container}>
+    // </View>
+    <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0)" }}>
       <PanGestureHandler onGestureEvent={gestureHandler}>
-        <Animated.View style={[animatedStyle, { alignItems: "center" }]}>
-          <SharedElement id={`${simpson?.id}`}>
+        <Animated.View style={[animatedStyle, styles.container, { backgroundColor: "black" }]}>
+          <SharedElement id={`${simpson?.id}`} style={{ marginTop: 35 }}>
             {isValidURL ? (
               <Image source={{ uri: simpson.avatar }} width={50} height={50} style={styles.image} />
             ) : (
@@ -84,8 +102,9 @@ export default DetailScreen;
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    marginHorizontal: 15,
-    marginTop: 30,
+    flex: 1,
+    width: "100%",
+    borderRadius: 30,
   },
   image: {
     height: 300,
@@ -101,16 +120,18 @@ const styles = StyleSheet.create({
     fontSize: 20,
     letterSpacing: 1,
     textTransform: "capitalize",
+    color: "white",
   },
   job: {
     fontSize: 16,
+    color: "white",
     marginTop: 5,
     textTransform: "capitalize",
-    color: "rgba(0,0,0,0.8)",
   },
   about: {
     fontSize: 16,
-    color: "#555",
+    marginHorizontal: 15,
+    color: "#999",
     marginVertical: 15,
   },
   title: {

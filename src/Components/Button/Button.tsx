@@ -1,78 +1,71 @@
 import React from "react";
-import {
-	Text,
-	TouchableOpacity,
-	StyleSheet,
-	StyleProp,
-	ViewStyle,
-	GestureResponderEvent,
-	TextStyle,
-	ColorPropType,
-	ActivityIndicator,
-} from "react-native";
-
+import { StyleSheet, Text, TouchableOpacity, StyleProp, ViewStyle, TextStyle, ActivityIndicator } from "react-native";
+import { cornerHelper, sizeHelper, textColorHelper, variantHelper } from "../../Utils/Helpers/ButtonStyleHelpers";
 type Props = {
-	text: string;
-	buttonStyle?: StyleProp<ViewStyle>;
-	textStyle?: StyleProp<TextStyle>;
-	corner?: "cornered" | "curved" | "rounded" | "circle" | number;
-	type?: "none" | "outlined" | "filled";
-	buttonColor?: string;
-	textColor?: string;
-	onPress: (event: GestureResponderEvent) => void;
-	loading?: boolean;
-	testID: string;
+  buttonStyle?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
+  onPress: Function;
+  text: string;
+  loading?: boolean;
+  disabled?: boolean;
+  size?: "small" | "medium" | "large" | "xlarge";
+  variant?: "filled" | "outlined";
+  corners?: "cornered" | "curved" | "rounded";
+  color?: string;
+  textColor?: string;
+  testID: string;
 };
-
 const Button: React.FC<Props> = ({
-	text,
-	type,
-	buttonColor,
-	textStyle,
-	textColor,
-	corner,
-	buttonStyle,
-	onPress,
-	loading,
-	testID,
+  buttonStyle,
+  textStyle,
+  onPress,
+  text,
+  loading,
+  disabled,
+  size,
+  variant,
+  corners,
+  color,
+  textColor,
+  testID,
 }) => {
-	const buttonTypes: Object = {
-		borderRadius:
-			corner === "cornered"
-				? 0
-				: corner === "curved"
-				? 5
-				: corner === "rounded"
-				? 10
-				: corner === "circle"
-				? "50%"
-				: corner,
-		backgroundColor: type === "filled" ? buttonColor : "rgba(0,0,0,0)",
-		borderColor: type === "none" ? "rgba(0,0,0,0)" : buttonColor,
-		borderWidth: !type || type === "none" ? 0 : 1,
-	};
-	return (
-		<TouchableOpacity
-			style={[styles.baseContainerStyle, buttonStyle, buttonTypes]}
-			onPress={onPress}
-			testID={testID || "customButton"}>
-			{loading ? (
-				<ActivityIndicator color={textColor} />
-			) : (
-				<Text style={[styles.baseTextStyle, textStyle, { color: textColor ? textColor : "#000" }]}>{text}</Text>
-			)}
-		</TouchableOpacity>
-	);
+  return (
+    <TouchableOpacity
+      key={text}
+      testID={testID}
+      disabled={disabled}
+      style={[styles.button, sizeHelper(size), variantHelper(variant, color), cornerHelper(corners), buttonStyle]}
+      onPress={() => !disabled && onPress()}
+    >
+      <Text
+        key={text + "1"}
+        style={[styles.buttonText, textStyle, { color: textColorHelper(variant, color, textColor) }]}
+      >
+        {loading ? (
+          <ActivityIndicator
+            size={27}
+            color={textColorHelper(variant, color, textColor)}
+            style={{ alignSelf: "center" }}
+          />
+        ) : (
+          text
+        )}
+      </Text>
+    </TouchableOpacity>
+  );
 };
-
 const styles = StyleSheet.create({
-	baseContainerStyle: {
-		padding: 5,
-	},
-	baseTextStyle: {
-		letterSpacing: 1,
-		fontWeight: "500",
-	},
+  button: {
+    alignItems: "center",
+    justifyContent: "center",
+    borderStyle: "solid",
+    paddingHorizontal: 8,
+    minHeight: 37,
+    marginVertical: 3,
+  },
+  buttonText: {
+    fontSize: 18,
+    alignSelf: "center",
+  },
 });
-
 export default Button;

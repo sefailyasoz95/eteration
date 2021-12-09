@@ -1,5 +1,7 @@
 export type AppStackParamList = {
-	List: undefined;
+	List: {
+		simpson: any
+	};
 	Create: undefined;
 	Detail: {
 		simpson: any;

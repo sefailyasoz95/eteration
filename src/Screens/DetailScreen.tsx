@@ -37,7 +37,6 @@ const DetailScreen = ({ navigation, route }: Props) => {
   const scale = useSharedValue(1);
   const x = useSharedValue(0);
   const y = useSharedValue(0);
-  const dimension = useWindowDimensions();
   const animatedStyle = useAnimatedStyle(() => {
     return {
       //   top: withSpring(top.value, SPRING_CONFIG),
@@ -48,6 +47,7 @@ const DetailScreen = ({ navigation, route }: Props) => {
       ],
     };
   });
+
   const gestureHandler = useAnimatedGestureHandler<PanGestureHandlerGestureEvent, AnimatedGHContext>({
     onStart(_, context) {
       context.startTop = top.value;
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     width: "100%",
-    borderRadius: 30,
+    borderRadius: 20,
   },
   image: {
     height: 300,
